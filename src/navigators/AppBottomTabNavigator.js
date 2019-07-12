@@ -1,4 +1,4 @@
-import { createBottomTabNavigator, createAppContainer } from "react-navigation";
+import { createBottomTabNavigator, createAppContainer,getActiveChildNavigationOptions } from "react-navigation";
 import { Platform } from "react-native";
 import Page1 from "../page/Page1";
 import Page2 from "../page/Page2";
@@ -13,7 +13,7 @@ const AppTabNavigator = createBottomTabNavigator(
     Page1: {
       screen: Page1,
       navigationOptions: {
-        title: "消息",
+        title: "Page1",
         tabBarLabel: "Page1",
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
@@ -27,7 +27,7 @@ const AppTabNavigator = createBottomTabNavigator(
     Page2: {
       screen: Page2,
       navigationOptions: {
-        title: "消息",
+        title: "Page2",
         tabBarLabel: "Page2",
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
@@ -41,7 +41,7 @@ const AppTabNavigator = createBottomTabNavigator(
     Page3: {
       screen: Page3,
       navigationOptions: {
-        title: "消息",
+        title: "Page3",
 
         tabBarLabel: "Page3",
         tabBarIcon: ({ tintColor, focused }) => (
@@ -74,8 +74,24 @@ const AppTabNavigator = createBottomTabNavigator(
       activeTintColor: Platform.OS === "ios" ? "#e91e63" : "#fdf"
     },
     initialRouteName: "Page1",
-    navigationOptions: {}
+    navigationOptions:  ({ navigation, screenProps }) => ({
+      // you can put fallback values before here, eg: a default tabBarLabel
+      ...getActiveChildNavigationOptions(navigation, screenProps),
+      // put other navigationOptions that you don't want the active child to
+      // be able to override here!
+    })
   }
 );
+
+// AppTabNavigator.navigationOptions = ({ navigation, screenProps }) => {
+//   const { routeName,headerRight } = navigation.state.routes[navigation.state.index];
+
+//   // You can do whatever you like here to pick the title based on the route name
+//   const headerTitle = routeName;
+//   return {
+//     headerTitle,
+//     headerRight
+//   };
+// };
 
 export default AppTabNavigator;

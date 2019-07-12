@@ -3,6 +3,10 @@ import { Text, View, Button } from "react-native";
 import { SwitchActions } from "react-navigation";
 
 export default class Page1 extends Component {
+  static navigationOptions = {
+    tabBarLabel: 'Settings!',
+    headerRight:<Button title="返回"></Button>
+  };
   render() {
     return (
       <View>
@@ -53,6 +57,9 @@ export default class Page1 extends Component {
             this.props.navigation.navigate("Page2");
           }}
         />
+        <Text>
+        {JSON.stringify(this.props.navigation)}
+        </Text>
       </View>
     );
   }
