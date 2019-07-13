@@ -57,9 +57,19 @@ export default class Page1 extends Component {
             this.props.navigation.navigate("Page2");
           }}
         />
-        <Text>
-        {JSON.stringify(this.props.navigation)}
-        </Text>
+        <Button
+          title="ImagePicker"
+          onPress={() => {
+            this.props.navigation.navigate("ImagePicker");
+          }}
+        />
+
+        <Button
+          title="video"
+          onPress={() => {
+            this.props.navigation.navigate("Video");
+          }}
+        />
       </View>
     );
   }
